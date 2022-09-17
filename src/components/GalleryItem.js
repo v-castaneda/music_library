@@ -1,9 +1,13 @@
-import React from 'react'
+import { useState } from 'react'
 
 const GalleryItem = (props) => {
+    let [view, setView] = useState(false)
+
     return (
-        <div>
-            TEsting
+        <div 
+            onClick={() => setView(!view)}
+            style={{'display': 'inline-block'}}>
+            <p>One Gallery Item</p>
         </div>
     )
 }
