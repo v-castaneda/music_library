@@ -1,7 +1,11 @@
 import './App.css';
-import { useEffect, useState } from 'react'
-import SearchBar from './components/SearchBar';
-import Gallery from './components/Gallery';
+import React, { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import SearchBar from './components/SearchBar'
+import Gallery from './components/Gallery'
+import AlbumView from './components/AlbumView'
+import ArtistView from './components/ArtistView'
+// import { Fragment } from 'react/cjs/react.production.min'
 
 const App = () => {
   let [search, setSearch] = useState('')
@@ -33,11 +37,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <SearchBar handleSearch = {handleSearch} />
-      {message}
-      <Gallery data={data} />
+    {message}
+      <Router>
+        <Routes>
+          <Route path='/' element={
+            <React.Fragment>
+              <SearchBar handleSearch = {handleSearch} />
+              <Gallery data={data} />
+            </React.Fragment>
+          } />
+          <Route path='/album/:id' element={<AlbumView />} />
+          <Route path='/artist/:id' element={<ArtistView />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
